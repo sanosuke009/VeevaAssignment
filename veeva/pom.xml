@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.veeva</groupId>
+  <artifactId>veeva</artifactId>
+  <version>1.0.0</version>
+
+  <name>veeva</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.build.timestamp.format>ddMMhhmm</maven.build.timestamp.format>
+    </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.11.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>7.21.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>7.21.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.masterthought/cucumber-reporting -->
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>5.8.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.masterthought/maven-cucumber-reporting -->
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>maven-cucumber-reporting</artifactId>
+            <version>5.8.5</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.29.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.5.2</version>
+                    <configuration>
+                        <testFailureIgnore>true</testFailureIgnore>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>TestNG.xml</suiteXmlFile>
+                        </suiteXmlFiles>
+                        <properties>
+                            <dataproviderthreadcount>20</dataproviderthreadcount>
+                            <parallel>tests</parallel>
+                            <threadCount>10</threadCount>
+                        </properties>
+                        <systemPropertyVariables>
+                            <browser>${browser}</browser>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>net.masterthought</groupId>
+                    <artifactId>maven-cucumber-reporting</artifactId>
+                    <version>5.8.5</version>
+                    <executions>
+                        <execution>
+                            <id>execution</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                            <configuration>
+                                <projectName>MyTestCucumberProject</projectName>
+                                <!-- optional, per documentation set this to "true" to bypass generation of Cucumber Reports entirely, defaults to false if not specified -->
+                                <skip>false</skip>
+                                <!-- output directory for the generated report -->
+                                <outputDirectory>Results/cucumber-report-html_${browser}_${maven.build.timestamp}</outputDirectory>
+                                <!-- optional, defaults to outputDirectory if not specified -->
+                                <inputDirectory>Results/</inputDirectory>
+                                <jsonFiles>
+                                    <!-- supports wildcard or name pattern -->
+                                    <param>**/*.json</param>
+                                </jsonFiles>
+                                <!-- optional, defaults to outputDirectory if not specified -->
+                                <parallelTesting>true</parallelTesting>
+                                <!-- optional, set true to group features by its Ids -->
+                                <mergeFeaturesById>true</mergeFeaturesById>
+                                <!-- optional, set true to get a final report with latest results of the same test from different test runs -->
+                                <mergeFeaturesWithRetest>true</mergeFeaturesWithRetest>
+                                <!-- optional, set true to fail build on test failures -->
+                                <checkBuildResult>false</checkBuildResult>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>chrome</id>
+            <properties>
+                <browser>chrome</browser>
+            </properties>
+        </profile>
+        <profile>
+            <id>edge</id>
+            <properties>
+                <browser>edge</browser>
+            </properties>
+        </profile>
+        <profile>
+            <id>firefox</id>
+            <properties>
+                <browser>firefox</browser>
+            </properties>
+        </profile>
+    </profiles>
+</project>

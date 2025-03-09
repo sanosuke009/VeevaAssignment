@@ -1,0 +1,8 @@
+<suite name="Veeva">
+    <test name="Veeva Chrome">
+        <parameter name="browser" value="${browser}"/>
+        <classes>
+            <class name="TestRunner.Runner"/>
+        </classes>
+    </test>
+</suite>
