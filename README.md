@@ -9,7 +9,7 @@
 ```shell
 cd ./veeva/
 ```
-5. There are 4 profiles in this repo for Chrome, Edge & Firefox. To execute the tests in a particular browser, run the command from the shell/bash
+5. There are 3 profiles in this repo for Chrome, Edge & Firefox. To execute the tests in a particular browser, run the command from the shell/bash
 ```shell
 mvn clean test -P<Browsername> verify
 ```
@@ -41,11 +41,17 @@ mvn clean test -Pedge verify
 2. - [ ] The automation-framework module will hold all the reusable code and it will be shared to all 3 test modules.Test modules will hold their product specific codes that cannot be shared across.
 3. - [x] Dynamic use of browser binaries(Chrome,Firefox etc..) for web driver creation
 4. - [ ] Zero Usage of By class, if you are designing Page Object Model design pattern
-5. - [N/A] If you are using the Page Factory design pattern,PageFactory.initElements() should be called only in one place throughout the Framework. It should not be called in each Page class constructor.
-6. - [N/A] Use JSON/YAML file to maintain test data
+5. - [ ] If you are using the Page Factory design pattern,PageFactory.initElements() should be called only in one place throughout the Framework. It should not be called in each Page class constructor.
+> [!IMPORTANT]
+> NOT Applicable
+6. - [ ] Use JSON/YAML file to maintain test data
+> [!IMPORTANT]
+> NOT Applicable
 7. - [x] Use Cucumber Hooks effectively
 8. - [ ] Don’t pass cucumber Tags from Runner Class, Pass cucumber tags from testng.xml file and bind the tag to Runner Class during runtime
 9. - [ ] Generate Runner classes for each Feature file during runtime.
+> [!WARNING]
+> Using cucumber-jvm-parallel-plugin is not recommended anymore
 10. - [x] Run the test scenarios in multiple threads without using testng.xml file and by using maven commands
 
 ## Test Case(s) Automated: (Minimum 2 Test Cases Were Required)
@@ -58,6 +64,11 @@ mvn clean test -Pedge verify
 2. Test Case 2: for CP
     1. From the CP home page , hover on [...] menu Item >> click on New & Features
     2. Count total number of Videos Feeds and count the videos feeds those are present in the page >= 3d
+3. Test Case 4: for DP2
+    1. Go to DP2 home page 
+    2. Scroll down to the footer
+    3. Different links for various categories (Team, Tickets, Shop, etc..) will be visible
+    4. Find all the hyperlinks of the Footer links into a CSV file and report if any duplicate hyperlinks are present.
 
 ## Automation Framework Architecture Diagram
 ![alt text](FrameworkArchitectureDiagram.png)
