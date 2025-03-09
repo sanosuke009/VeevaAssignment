@@ -15,3 +15,7 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+#vscode files
+.vscode/
+#Result of the 'mvn' command
+Results/
