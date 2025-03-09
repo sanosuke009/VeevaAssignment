@@ -58,3 +58,6 @@ mvn clean test -Pedge verify
 2. Test Case 2: for CP
     1. From the CP home page , hover on [...] menu Item >> click on New & Features
     2. Count total number of Videos Feeds and count the videos feeds those are present in the page >= 3d
+
+## Automation Framework Architecture Diagram
+![alt text](FrameworkArchitectureDiagram.png)
