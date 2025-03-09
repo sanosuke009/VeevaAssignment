@@ -70,6 +70,14 @@
                         <suiteXmlFiles>
                             <suiteXmlFile>TestNG.xml</suiteXmlFile>
                         </suiteXmlFiles>
+                        <properties>
+                            <dataproviderthreadcount>20</dataproviderthreadcount>
+                            <parallel>tests</parallel>
+                            <threadCount>10</threadCount>
+                        </properties>
+                        <systemPropertyVariables>
+                            <browser>${browser}</browser>
+                        </systemPropertyVariables>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -88,7 +96,7 @@
                                 <!-- optional, per documentation set this to "true" to bypass generation of Cucumber Reports entirely, defaults to false if not specified -->
                                 <skip>false</skip>
                                 <!-- output directory for the generated report -->
-                                <outputDirectory>Results/cucumber-report-html_${maven.build.timestamp}</outputDirectory>
+                                <outputDirectory>Results/cucumber-report-html_${browser}_${maven.build.timestamp}</outputDirectory>
                                 <!-- optional, defaults to outputDirectory if not specified -->
                                 <inputDirectory>Results/</inputDirectory>
                                 <jsonFiles>
@@ -109,4 +117,24 @@
                 </plugin>
             </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>chrome</id>
+            <properties>
+                <browser>chrome</browser>
+            </properties>
+        </profile>
+        <profile>
+            <id>edge</id>
+            <properties>
+                <browser>edge</browser>
+            </properties>
+        </profile>
+        <profile>
+            <id>firefox</id>
+            <properties>
+                <browser>firefox</browser>
+            </properties>
+        </profile>
+    </profiles>
 </project>

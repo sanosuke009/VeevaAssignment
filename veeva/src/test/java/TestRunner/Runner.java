@@ -1,6 +1,7 @@
 package TestRunner;
 
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
@@ -13,14 +14,19 @@ import io.cucumber.testng.CucumberOptions;
 )
 public class Runner extends AbstractTestNGCucumberTests{
 
-    // static thread-safe container to keep the browser value
-    public final static ThreadLocal<String> BROWSER = new ThreadLocal<>();
+    public static String BROWSER;
 
     @BeforeTest
     @Parameters({"browser"})
-    public void defineBrowser(String browser) {
-        //put browser value to thread-safe container
-        Runner.BROWSER.set(browser);
+    public synchronized void defineBrowser(String browser) {
+        Runner.BROWSER = browser;
         System.out.println(browser);
     }
+
+    @Override
+	@DataProvider(parallel=true)
+	public Object[][] scenarios()
+	{
+		return super.scenarios();
+	}
 }

@@ -28,7 +28,7 @@ public class CPStepDefs {
     @Before
     public void setUp(Scenario sc){
         this.di = new DependencyInjection(sc);
-        String browser = Runner.BROWSER.get();
+        String browser = Runner.BROWSER;
         System.out.println("Inside set up Browser: " + browser);
         this.di.initDriver(browser);
         this.di.loadURL(this.di.getFromConfig("cpurl"));
