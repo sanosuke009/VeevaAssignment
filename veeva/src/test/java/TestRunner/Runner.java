@@ -8,7 +8,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-    features = "src/test/resources/featurefiles/CP",
+    features = "src/test/resources/featurefiles",
     glue = {"StepDefs"},
     plugin = {"json:Results/cucumberjson/cucumber.json"}
 )

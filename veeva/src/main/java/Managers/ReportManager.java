@@ -15,6 +15,10 @@ public class ReportManager extends BaseClass {
         scenario.attach(message, "text/plain", filename);
     }
 
+    public void attachToReport(String message, String mediaType, String filename) {
+        scenario.attach(message, mediaType, filename);
+    }
+
     public void takeScreenshot() {
         byte[] sc = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
         scenario.attach(sc, "image/png", "Screenshot");
