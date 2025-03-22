@@ -15,25 +15,29 @@ public class DriverManager extends ConfigManager{
         this.browser = browser;
         switch (this.browser.toLowerCase()) {
             case "chrome":
-                driver = new ChromeDriver();
+                this.driver = new ChromeDriver();
                 break;
             case "firefox":
-                driver = new FirefoxDriver();
+                this.driver = new FirefoxDriver();
                 break;
             case "edge":
-                driver = new EdgeDriver();
+                this.driver = new EdgeDriver();
                 break;
             case "ie":
-                driver = new InternetExplorerDriver();
+                this.driver = new InternetExplorerDriver();
                 break;
             default:
-                driver = new ChromeDriver();
+                this.driver = new ChromeDriver();
                 break;
         }
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.parseInt(this.getFromConfig("explicitwait"))));    
-        wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(this.getFromConfig("explicitwait"))));
-        return driver;
+        this.driver.manage().window().maximize();
+        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.parseInt(this.getFromConfig("explicitwait"))));    
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(this.getFromConfig("explicitwait"))));
+        return this.driver;
+    }
+
+    public synchronized WebDriver initDriver(){
+        return initDriver(this.browser);
     }
 
     public synchronized void loadURL(String url){
@@ -49,6 +53,14 @@ public class DriverManager extends ConfigManager{
     }
 
     public WebDriver getDriver(){
-        return driver;
+        return this.driver;
+    }
+
+    public void setBrowser(String browser){
+        this.browser = browser;
+    }
+
+    public String getBrowser(){
+        return this.browser;
     }
 }
